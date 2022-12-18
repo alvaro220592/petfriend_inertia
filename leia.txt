@@ -1,3 +1,4 @@
+* comandos com "./vendor/bin/sail" são por conta do projeto estar rodando com Sail. Exemplo: "./vendor/bin/sail artisan make:algumaCoisa" pode ser substituido pelo "php artisan make:algumaCoisa", bem como os demais comandos tipo "composer require..." e "npm install..." caso vc não esteja usando Sail
 CRIAÇÃO DO PROJETO
     Tutorial de criação do projeto: https://www.youtube.com/watch?v=cFE4znLLhsg&t=147s
 
