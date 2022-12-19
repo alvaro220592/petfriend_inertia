@@ -23,6 +23,9 @@ BREEZE STARTER KIT
     Atualizando as dependências
         ./vendor/bin/sail npm install && ./vendor/bin/sail npm run dev
 
+RODAR NPM
+    ./vendor/bin/sail npm run dev
+
 SPATIE PERMISSION (Permissões de acesso)
     Baixando o pacote do Spatie
         ./vendor/bin/sail composer require spatie/laravel-permission
@@ -67,3 +70,21 @@ USAR SPATIE COM VUE - tutorial: https://dev.to/geowrgetudor/how-to-use-laravel-p
     em app.js:
         import LaravelPermissionToVueJS from 'laravel-permission-to-vuejs'
         app.use(LaravelPermissionToVueJS)
+
+APELIDO PARA ./vendor/bin/sail
+    no terminal, abra o .bashrc: vim ~/.bashrc
+    insira no final: alias sail="./vendor/bin/sail"
+    Assim, o comando terá o apelido de sail
+
+INSTALAÇÃO SASS
+    sail npm add -D sass
+    adicione o caminho do sass no input do vite.config.js:
+        plugins: [
+            laravel({
+                input: ["resources/sass/app.scss", "resources/js/app.js"], // add scss file
+                refresh: true,
+            }),
+        ],
+
+    adicione ao blade principal:
+        @vite(['resources/sass/app.scss', ...
