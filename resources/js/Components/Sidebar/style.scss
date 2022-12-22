@@ -1,5 +1,41 @@
 @import 'resources/sass/app.scss';
 
 aside {
-    background-color: $laranja;
+    background-color: rgb(144, 169, 238);
+    min-height: 100vh;
+    position: fixed;
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; 
+}
+
+aside.collapsed + section {
+    margin-left: 50px;
+    transition: .3s;
+}
+
+aside.expanded + section {
+    margin-left: 250px;
+    transition: .3s;
+}
+
+.collapsed, .expanded {
+    transition: .3s;
+}
+
+.collapsed {
+    width: 50px;
+
+    span {
+        display: none;
+    }
+}
+
+.expanded {
+    width: 250px;
+}
+
+.menu {
+    display: flex;
 }

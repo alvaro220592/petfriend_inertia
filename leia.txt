@@ -88,3 +88,6 @@ INSTALAÇÃO SASS
 
     adicione ao blade principal:
         @vite(['resources/sass/app.scss', ...
+
+EM CASO DE ERRO DE MANIFEST
+	sail npm run build

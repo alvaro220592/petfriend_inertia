@@ -1,15 +1,18 @@
+<script setup>
+    import Sidebar from '@/Components/Sidebar/Sidebar.vue'
+    import Navbar from '@/Components/Navbar/Navbar.vue'
+    import Main from '@/Components/Main/Main.vue'
+</script>
+
 <template>
-    <div class="geral">
-        <aside>
-            sidebar
-        </aside>
-        <section>
-            <nav>
-                navbar
-            </nav>
-            <main>
-                conteúdo
-            </main>
+    <div class="all">
+
+        <Sidebar />
+        
+        <section>        
+            <Navbar />
+        
+            <Main />
         </section>
     </div>
 </template>
@@ -18,29 +21,12 @@
 
     @import 'resources/sass/app.scss';
 
-    .geral {
+    .all {
         display: flex;
 
-        aside {
-            background-color: lightcoral;
-            min-height: 100vh;
-        }
-        
         section {
             min-height: 100vh;
             width: 100%;
-            
-            nav {
-                background-color: lightcyan;
-                height: 10vh;
-                width: 100%;
-            }
-
-            main {
-                background-color: lightpink;
-                min-height: 90vh;
-                width: 100%;
-            }
         }
     }
 </style>

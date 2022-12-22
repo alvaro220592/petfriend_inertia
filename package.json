@@ -21,6 +21,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "bootstrap-icons": "^1.10.2",
         "laravel-permission-to-vuejs": "^3.0.1"
     }
 }
