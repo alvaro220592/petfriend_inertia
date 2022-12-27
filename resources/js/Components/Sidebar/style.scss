@@ -24,10 +24,17 @@ aside.expanded + section {
     transition: .3s;
 }
 
+// .submenu {
+//     display: none;
+// }
+.display-none {
+    display: none;
+}
+
 .collapsed {
     width: 50px;
 
-    span {
+    span, .submenu {
         display: none;
     }
 }
@@ -37,5 +44,9 @@ aside.expanded + section {
 }
 
 .menu {
-    display: flex;
+    display: block;
+
+    .menu-title {
+        display: flex;
+    }
 }
