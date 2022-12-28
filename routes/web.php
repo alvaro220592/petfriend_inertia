@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,12 +20,6 @@ use Spatie\Permission\Models\Role;
 */
 
 Route::get('/', function () {
-    // Role::create(['name' => 'Teste']);
-    // Permission::create(['name' => 'Testar']);
-    // $role = Role::where('name', 'Teste')->first();
-    // dd($role->hasPermissionTo('Testar'));
-    // $role->syncPermissions(['Testar']);
-    // dd(Auth::user()->roles[0]->hasPermissionTo('Testar'));
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -36,6 +31,14 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/users', function() {
+    return Inertia::render('User/User');
+})->name('users');
+
+Route::get('/getUsers', function() {
+    return response()->json(User::all());
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -7,7 +7,15 @@ aside {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    overflow-x: hidden; 
+    overflow-x: hidden;
+
+    .logo{
+        height: 10vh;
+    }
+    
+    .logo-line {
+        margin-bottom: 50px;
+    }
 }
 
 aside.collapsed + section {
@@ -44,9 +52,19 @@ aside.expanded + section {
 }
 
 .menu {
+    margin: 20px 5px;
     display: block;
 
     .menu-title {
         display: flex;
+
+        .menu-icon {
+            margin: 0px 8px;
+            font-size: 20px;
+        }
+    }
+
+    .submenu {
+        margin: 10px 30px;
     }
 }

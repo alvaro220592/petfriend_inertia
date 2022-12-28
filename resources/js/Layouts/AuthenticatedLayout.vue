@@ -12,7 +12,8 @@
         <section>        
             <Navbar />
         
-            <Main />
+            <!-- <Main /> -->
+            <slot />
         </section>
     </div>
 </template>
