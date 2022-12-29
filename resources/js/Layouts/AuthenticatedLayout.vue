@@ -24,6 +24,7 @@
 
     .all {
         display: flex;
+        background-color: $second;
 
         section {
             min-height: 100vh;

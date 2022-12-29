@@ -6,23 +6,27 @@
     <aside class="collapsed">
         <ul>
             <div class="logo">
-                cgjkdfhgk
+                <div class="logo__imagem">
+                    Imagem
+                </div>
             </div>
 
-            <hr class="logo-line">
+            <!-- <hr class="logo-line"> -->
 
-                    <Link :href="route('dashboard')">
-            <li class="menu">
-                <div class="menu-title">
-                        <font-awesome-icon icon="fa-solid fa-chart-line" class="menu-icon" />
+            <Link :href="route('dashboard')">
+                <li class="menu">
+                    <div class="menu-title">
+                        <!-- <font-awesome-icon icon="fa-solid fa-chart-line" class="menu-icon" /> -->
+                        <i class="bi bi-bar-chart menu-icon"></i>
                         <span>Dashboard</span>
-                </div>
-            </li>
-                    </Link>
+                    </div>
+                </li>
+            </Link>
 
             <li class="menu">
                 <div class="menu-title" @click="toggleSubmenu">
-                    <font-awesome-icon icon="fa-solid fa-circle-plus" class="menu-icon" />
+                    <!-- <font-awesome-icon icon="fa-solid fa-circle-plus" class="menu-icon" /> -->
+                    <i class="bi bi-plus-circle menu-icon"></i>
                     <span>Cadastros</span>
                 </div>
 
@@ -37,7 +41,8 @@
 
             <li class="menu">
                 <div class="menu-title" @click="toggleSubmenu">
-                    <font-awesome-icon icon="fa-solid fa-gear" class="menu-icon" />
+                    <!-- <font-awesome-icon icon="fa-solid fa-gear" class="menu-icon" /> -->
+                    <i class="bi bi-gear menu-icon"></i>
                     <span>Configurações</span>
                 </div>
 
@@ -53,7 +58,14 @@
 
 <script>
 export default {
-    mounted() {},
+    mounted() {
+
+        let aside = document.querySelector("aside");
+        if (localStorage.getItem('sidebar_expanded')) {
+            aside.classList.remove("collapsed");
+            aside.classList.add("expanded");
+        }
+    },
 
     methods: {
         toggleSubmenu: function (event) {
@@ -69,6 +81,8 @@ export default {
             if (!aside.classList.contains("expanded")) {
                 aside.classList.add("expanded");
                 aside.classList.remove("collapsed");
+
+                localStorage.setItem('sidebar_expanded', true);
             }
         },
     },
