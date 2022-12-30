@@ -4,6 +4,7 @@ import Pagination from "@/Components/Pagination/Pagination.vue";
 import { ref } from "vue";
 import { watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+import Breadcrumb from "@/Components/Breadcrumb/Breadcrumb.vue";
 
 const props = defineProps({
     users: {
@@ -31,8 +32,11 @@ watch(search, (value) => {
 
 <template>
     <AuthenticatedLayout>
+
+        <Breadcrumb endereco="Cadastros / Usuários" />
+        
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <!-- <input
                     type="text"
                     v-model="search"
@@ -43,7 +47,7 @@ watch(search, (value) => {
                     type="text"
                     v-model="search"
                     placeholder="Buscar..."
-                    class="form-control"
+                    class="form-control input"
                 />
             </div>
         </div>
@@ -69,7 +73,13 @@ watch(search, (value) => {
 </template>
 
 <style lang="scss" scoped>
-@import "resources/sass/app.scss";
+    @import "resources/sass/app.scss";
+
+    .input:focus {
+        // border: none;
+        border: 1px solid $first;
+        box-shadow: none;
+    }
 </style>
 <script>
 export default {

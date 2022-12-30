@@ -21,12 +21,19 @@ import Main from "@/Components/Main/Main.vue";
                 </div>
             </div> -->
 
+
             <div class="card_container">
                 <slot />
             </div>
         </section>
     </div>
 </template>
+
+<script>
+export default {
+    
+}
+</script>
 
 <style lang="scss">
 @import "resources/sass/app.scss";

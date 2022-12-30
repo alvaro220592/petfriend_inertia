@@ -34,7 +34,7 @@ defineProps({
     </div>
 </template>
 
-<style lang="scss" scoped>    
+<style lang="scss" scoped>
     @import 'resources/sass/app.scss';
 
     .pagination_link {
