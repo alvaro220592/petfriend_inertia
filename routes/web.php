@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Permission;
@@ -32,12 +33,20 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/users', function() {
-    return Inertia::render('User/User');
+Route::get('/users', function(Request $request) {
+    return Inertia::render('User/User', [
+        'users' => User::query()
+            ->when(Request::input('search'), function($query, $search) {
+                $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%");
+        })->paginate(5)
+        ->withQueryString(),
+        'filters' => Request::only(['search'])
+    ]);
 })->name('users');
 
 Route::get('/getUsers', function() {
-    return response()->json(User::all());
+    return response()->json(User::paginate(10));
 });
 
 Route::middleware('auth')->group(function () {

@@ -91,3 +91,7 @@ INSTALAÇÃO SASS
 
 EM CASO DE ERRO DE MANIFEST
 	sail npm run build
+
+
+Paginação e filtro
+    https://larainfo.com/blogs/laravel-9-inertia-vue-3-search-filter-example
