@@ -15,44 +15,62 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    perpage: {
+        type: Number,
+        default: 5,        
+    }
 });
+
 // pass filters in search
 let search = ref(props.filters.search);
-watch(search, (value) => {
+
+let perpage = ref(parseInt(props.perpage));
+
+watch(search, (search_value) => {
+    let id_perpage = document.getElementById('perpage').value
+    
     Inertia.get(
         "/users",
-        { search: value },
+        { search: search_value, perpage: id_perpage },
         {
             preserveState: true,
             replace: true,
         }
     );
 });
+
+watch(perpage, (perpage_value) => {
+    let id_search = document.getElementById('search').value
+    
+    Inertia.get(
+        "/users",
+        { perpage: perpage_value, search: id_search },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+});
+
 </script>
 
 <template>
     <AuthenticatedLayout>
-
         <Breadcrumb endereco="Cadastros / Usuários" />
         
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-md-4">
-                <!-- <input
-                    type="text"
-                    v-model="search"
-                    placeholder="Search..."
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5"
-                /> -->
                 <input
                     type="text"
                     v-model="search"
+                    id="search"
                     placeholder="Buscar..."
                     class="form-control input"
                 />
             </div>
         </div>
 
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>id</th>
@@ -69,20 +87,35 @@ watch(search, (value) => {
             </tbody>
         </table>
         <Pagination :data="users.links" />
+
+        <div class="row mt-3">
+            <div class="col-md-12 text-center">
+                <select id="perpage" v-model="perpage">
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+                Resultados por página
+            </div>
+        </div>
     </AuthenticatedLayout>
 </template>
 
 <style lang="scss" scoped>
-    @import "resources/sass/app.scss";
+@import "resources/sass/app.scss";
 
-    .input:focus {
-        // border: none;
-        border: 1px solid $first;
-        box-shadow: none;
-    }
+.input:focus {
+    // border: none;
+    border: 1px solid $first;
+    box-shadow: none;
+}
 </style>
 <script>
 export default {
+    data() {
+        return {};
+    },
+
     // props: {
     //     users: {
     //         type: Object,
@@ -94,8 +127,10 @@ export default {
     //     },
     // },
 
-    mounted() {
+    computed() {
         // this.getUsers();
+        // Deixando selecionada a primeira opção do select
+        // document.getElementById('perpage').querySelector('option').setAttribute('selected', true)
     },
 
     methods: {

@@ -1,5 +1,5 @@
 <script setup>
-import { Link }  from '@inertiajs/inertia-vue3';
+import { Link } from "@inertiajs/inertia-vue3";
 
 defineProps({
     data: {
@@ -8,7 +8,6 @@ defineProps({
     },
 });
 </script>
-
 
 <template>
     <!-- <div v-if="data.length > 3" class="flex justify-center mt-4 space-x-4">
@@ -27,7 +26,7 @@ defineProps({
             v-for="(link, k) in data"
             :key="k"
             class="pagination_link"
-            :class="{'pagination_link_active': link.active}"
+            :class="{ pagination_link_active: link.active }"
             :href="link.url"
             v-html="link.label"
         />
@@ -35,15 +34,15 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-    @import 'resources/sass/app.scss';
+@import "resources/sass/app.scss";
 
-    .pagination_link {
-        padding: 5px 10px;
-    }
+.pagination_link {
+    padding: 5px 10px;
+}
 
-    .pagination_link_active {
-        padding: 5px 10px;
-        background-color: $second;
-    }
-
+.pagination_link_active {
+    padding: 5px 10px;
+    background-color: $second;
+    border: solid 1px $first;
+}
 </style>

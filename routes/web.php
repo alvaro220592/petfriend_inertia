@@ -33,17 +33,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/users', function(Request $request) {
-    return Inertia::render('User/User', [
-        'users' => User::query()
-            ->when(Request::input('search'), function($query, $search) {
-                $query->where('name', 'LIKE', "%$search%")
-                ->orWhere('email', 'LIKE', "%$search%");
-        })->paginate(5)
-        ->withQueryString(),
-        'filters' => Request::only(['search'])
-    ]);
-})->name('users');
+
 
 Route::get('/getUsers', function() {
     return response()->json(User::paginate(10));
@@ -53,6 +43,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/users', function() {
+        return Inertia::render('User/User', [
+            'users' => User::query()
+                ->when(Request::input('search'), function($query, $search) {
+                    $query->where('name', 'LIKE', "%$search%")
+                        ->orWhere('email', 'LIKE', "%$search%");
+                })->paginate(Request::input('perpage') ? Request::input('perpage') : 5)
+            // })->paginate(10)
+            ->withQueryString(),
+            'filters' => Request::only(['search'])
+        ]);
+    })->name('users');
 });
 
 require __DIR__.'/auth.php';
