@@ -17,7 +17,7 @@ const props = defineProps({
     },
     perpage: {
         type: Number,
-        default: 5,        
+        default: 5,
     }
 });
 
@@ -105,42 +105,12 @@ watch(perpage, (perpage_value) => {
 @import "resources/sass/app.scss";
 
 .input:focus {
-    // border: none;
     border: 1px solid $first;
     box-shadow: none;
 }
 </style>
 <script>
 export default {
-    data() {
-        return {};
-    },
-
-    // props: {
-    //     users: {
-    //         type: Object,
-    //         default: () => ({}),
-    //     },
-    //     filters: {
-    //         type: Object,
-    //         default: () => ({}),
-    //     },
-    // },
-
-    computed() {
-        // this.getUsers();
-        // Deixando selecionada a primeira opção do select
-        // document.getElementById('perpage').querySelector('option').setAttribute('selected', true)
-    },
-
-    methods: {
-        // getUsers: function () {
-        //     axios.get("getUsers").then((res) => {
-        //         this.users = res.data;
-        //         console.log(this.users.links);
-        //     });
-        // },
-    },
     components: {
         Pagination,
     },

@@ -45,13 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/users', function() {
-        return Inertia::render('User/User', [
+        return Inertia::render('User/Index', [
             'users' => User::query()
                 ->when(Request::input('search'), function($query, $search) {
                     $query->where('name', 'LIKE', "%$search%")
                         ->orWhere('email', 'LIKE', "%$search%");
                 })->paginate(Request::input('perpage') ? Request::input('perpage') : 5)
-            // })->paginate(10)
             ->withQueryString(),
             'filters' => Request::only(['search'])
         ]);
