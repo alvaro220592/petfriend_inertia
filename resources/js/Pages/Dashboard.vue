@@ -13,12 +13,12 @@
         <Breadcrumb endereco="Dashboard" />
 
         <select @change="stateCities($event)">
-            <option value="">Selecione o estado</option>
+            <option value="">Estado</option>
             <option v-for="state in states" :key="state.id" :value="state.id">{{ state.uf }}</option>
         </select>
 
         <select>
-            <option v-if="cities.length == 0" value="">Selecione o estado</option>
+            <option v-if="cities.length == 0" value="">Cidade</option>
             <option v-for="city in cities" :key="city.id" :value="city.id">{{ city.nome }}</option>
         </select>
 
