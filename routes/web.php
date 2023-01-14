@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Models\User;
+use App\Http\Controllers\StateController;
+use App\Models\City;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,12 +30,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
 Route::get('/getUsers', function() {
     return response()->json(User::paginate(10));
 });
@@ -55,6 +50,14 @@ Route::middleware('auth')->group(function () {
             'filters' => Request::only(['search'])
         ]);
     })->name('users');
+
+    Route::get('/stateCity', [StateController::class, 'stateCity'])->name('stateCity');
+    Route::get('/stateCities/{state_id}', [StateController::class, 'stateCities'])->name('stateCities');
+    Route::get('/state', [StateController::class, 'index'])->name('state.index');
+
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->middleware(['verified'])->name('dashboard');
 });
 
 require __DIR__.'/auth.php';

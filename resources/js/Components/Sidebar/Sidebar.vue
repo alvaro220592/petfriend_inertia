@@ -52,6 +52,15 @@
                     <li><font-awesome-icon :icon="['fas', 'fa-chevron-right']" /> c</li>
                 </ul>
             </li>
+
+            <li class="menu">
+                <Link :href="route('logout')" as="button" method="post">
+                    <div class="menu-title">
+                        <i class="bi bi-arrow-left-square menu-icon"></i>
+                        <span>Sair</span>
+                    </div>
+                </Link>
+            </li>
         </ul>
     </aside>
 </template>
@@ -69,7 +78,11 @@ export default {
 
     methods: {
         toggleSubmenu: function (event) {
-            let submenu = event.currentTarget.nextSibling;
+            let menu = event.currentTarget
+
+            menu.classList.toggle('menu_active')
+
+            let submenu = menu.nextSibling;
 
             submenu.classList.toggle("display-none");
             

@@ -17,7 +17,10 @@ const props = defineProps({
     },
     perpage: {
         type: Number,
-        default: 5,
+        default: function() {
+            let urlParam = new URLSearchParams(window.location.search);
+            return urlParam.get('perpage') ? parseInt(urlParam.get('perpage')) : 5
+        }
     }
 });
 

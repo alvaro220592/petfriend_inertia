@@ -1,7 +1,7 @@
 @import 'resources/sass/app.scss';
 
 aside {
-    background-color: $first;
+    background-color: $third;
     min-height: 100vh;
     position: fixed;
     z-index: 1; /* Stay on top */
@@ -9,14 +9,15 @@ aside {
     left: 0;
     overflow-x: hidden;
     box-shadow: 1px 1px 2px grey;
+    color: $first;
     
     .logo{
         height: 70px;
         padding: 5px;
-        background-color: $fifth;
+        // background-color: $fifth;
 
         .logo__imagem {
-            background-color: $second;
+            background-color: $third;
             min-height: 100%;
         }
     }
@@ -62,10 +63,11 @@ aside.expanded + section {
 .menu {
     margin: 20px 15px;
     display: block;
-
+    
     .menu-title {
         display: flex;
         cursor: pointer;
+        padding: 5px 0px;
 
         .menu-icon {
             margin: 0px 8px;
@@ -79,5 +81,11 @@ aside.expanded + section {
 
     .submenu {
         margin: 10px 30px;
+    }
+
+    .menu_active {
+        background-color: $fourth;
+        border-radius: 8px;
+        transition: .3s;
     }
 }
