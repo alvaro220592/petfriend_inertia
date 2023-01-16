@@ -95,3 +95,5 @@ EM CASO DE ERRO DE MANIFEST
 
 Paginação e filtro
     https://larainfo.com/blogs/laravel-9-inertia-vue-3-search-filter-example
+
+Rollback em tabela específica: php artisan migrate:rollback  --path=/database/migrations/2023_01_14_004955_create_cities_table.php

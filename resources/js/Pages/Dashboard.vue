@@ -12,7 +12,7 @@
 
         <Breadcrumb endereco="Dashboard" />
 
-        <select @change="stateCities($event)">
+        <!-- <select @change="stateCities($event)">
             <option value="">Estado</option>
             <option v-for="state in states" :key="state.id" :value="state.id">{{ state.uf }}</option>
         </select>
@@ -20,7 +20,9 @@
         <select>
             <option v-if="cities.length == 0" value="">Cidade</option>
             <option v-for="city in cities" :key="city.id" :value="city.id">{{ city.nome }}</option>
-        </select>
+        </select> -->
+
+        <input type="text" v-model="cep" @keyup="buscaCep()">
 
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam soluta ipsa enim nihil rerum facere molestias tempore expedita voluptatibus vel. Maxime atque distinctio vero blanditiis sapiente pariatur, animi aperiam necessitatibus?
         Autem id facere tenetur illo ullam aliquam. Recusandae doloribus iure accusamus ut beatae magnam ipsa explicabo debitis cupiditate nemo, sunt eius nisi. Suscipit tempore quisquam, excepturi esse velit quae ducimus.
@@ -35,25 +37,34 @@
 export default {
     data(){
         return {
-            states: '',
-            cities: ''
+            // states: '',
+            // cities: ''
+            cep: ''
         }
     },
     mounted() {
-        this.stateCity()
+        // this.stateCity()
     },
     methods: {
-        stateCity: function() {
-            axios.get(route('state.index'))
-            .then(res => {
-                this.states = res.data
-            })
-        },
-        stateCities: function(event) {
-            axios.get(route('stateCities', event.currentTarget.value))
-            .then(res => {
-                this.cities = res.data
-            })
+        // stateCity: function() {
+        //     axios.get(route('state.index'))
+        //     .then(res => {
+        //         this.states = res.data
+        //     })
+        // },
+        // stateCities: function(event) {
+        //     axios.get(route('stateCities', event.currentTarget.value))
+        //     .then(res => {
+        //         this.cities = res.data
+        //     })
+        // }
+        buscaCep: function() {
+            if(this.cep.length == 8) {
+                axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
+                .then(res => {
+                    console.log(res)
+                })
+            }
         }
     }
 }

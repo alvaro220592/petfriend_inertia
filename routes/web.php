@@ -51,9 +51,9 @@ Route::middleware('auth')->group(function () {
         ]);
     })->name('users');
 
-    Route::get('/stateCity', [StateController::class, 'stateCity'])->name('stateCity');
-    Route::get('/stateCities/{state_id}', [StateController::class, 'stateCities'])->name('stateCities');
-    Route::get('/state', [StateController::class, 'index'])->name('state.index');
+    // Route::get('/stateCity', [StateController::class, 'stateCity'])->name('stateCity');
+    // Route::get('/stateCities/{state_id}', [StateController::class, 'stateCities'])->name('stateCities');
+    // Route::get('/state', [StateController::class, 'index'])->name('state.index');
 
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
