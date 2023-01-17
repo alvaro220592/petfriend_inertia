@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->string('servico');
-            $table->string('buscar_domicilio');
+            $table->string('buscar_em_casa');
             $table->string('data');
             $table->foreignId('pet_id')->constrained('pets');
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Pet;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PetController extends Controller

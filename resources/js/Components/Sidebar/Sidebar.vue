@@ -36,6 +36,12 @@
                             <font-awesome-icon :icon="['fas', 'fa-chevron-right']" /> Usuários
                         </Link>
                     </li>
+
+                    <li>
+                        <Link :href="route('clients.index')">
+                            <font-awesome-icon :icon="['fas', 'fa-chevron-right']" /> Clientes
+                        </Link>
+                    </li>
                 </ul>
             </li>
 

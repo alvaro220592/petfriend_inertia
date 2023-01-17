@@ -14,7 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Admin/Client/Index');
     }
 
     /**

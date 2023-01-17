@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\PetController;
 use App\Models\City;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/users', function() {
-        return Inertia::render('User/Index', [
+        return Inertia::render('Admin/User/Index', [
             'users' => User::query()
                 ->when(Request::input('search'), function($query, $search) {
                     $query->where('name', 'LIKE', "%$search%")
@@ -50,6 +53,9 @@ Route::middleware('auth')->group(function () {
             'filters' => Request::only(['search'])
         ]);
     })->name('users');
+
+    Route::resource('clients', ClientController::class);
+    Route::resource('pets', PetController::class);
 
     // Route::get('/stateCity', [StateController::class, 'stateCity'])->name('stateCity');
     // Route::get('/stateCities/{state_id}', [StateController::class, 'stateCities'])->name('stateCities');
