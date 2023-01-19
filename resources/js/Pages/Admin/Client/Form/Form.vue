@@ -43,6 +43,7 @@
     import InputLabel from "@/Components/InputLabel.vue";
     import PrimaryButton from "@/Components/PrimaryButton.vue"
     import { useForm } from '@inertiajs/inertia-vue3';
+    import { inject } from 'vue'
 
     const form = useForm({
         nome: '',
@@ -60,12 +61,34 @@
         ibge: '',
         siafi: '',
     })
+    
+    const swal = inject('$swal')
+    const options = {
+        confirmButtonColor: '#41b882',
+        cancelButtonColor: '#ff7674',
+    };
 
     const submit = () => {
         form.post(route('clients.store'), {
             onFinish: () => {
                 document.getElementById('form').reset()
-                alert('ok')
+                
+                const Toast = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', swal.stopTimer)
+                    toast.addEventListener('mouseleave', swal.resumeTimer)
+                }
+                })
+
+                Toast.fire({
+                icon: 'success',
+                title: 'Cadastrado com sucesso!'
+                })
             }
         })
     }
