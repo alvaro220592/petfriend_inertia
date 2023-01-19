@@ -17,14 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('cep');
             $table->string('logradouro');
-            $table->string('complemento');
+            $table->string('complemento')->nullable();
             $table->string('bairro');
             $table->string('localidade');
             $table->string('uf');
-            $table->string('ibge');
-            $table->string('guia');
-            $table->string('ddd');
-            $table->string('siafi');
+            $table->string('ibge')->nullable();
+            $table->string('gia')->nullable();
+            $table->string('ddd')->nullable();
+            $table->string('siafi')->nullable();
             $table->timestamps();
         });
     }
