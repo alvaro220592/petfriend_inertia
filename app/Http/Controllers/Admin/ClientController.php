@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Client;
+use App\Models\Address;
 
 class ClientController extends Controller
 {
@@ -14,7 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return inertia('Admin/Client/Index');
+        return inertia('Admin/Client/Index', [
+            'clients' => Client::all()
+        ]);
     }
 
     /**
@@ -35,7 +39,21 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $address = Address::where('cep', $request->cep)->first();
+        if($address){
+            $address_id = $address->id;
+        }else{
+            $address = new Address;
+            $address->fill($request->all());
+            $address->save();
+            $address_id = $address->id;
+        }
+        
+        $client = new Client;
+        $dados = $request->all();
+        $dados['address_id'] = $address->id;
+        
+        $client->create($dados);
     }
 
     /**

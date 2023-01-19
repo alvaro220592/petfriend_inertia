@@ -17,7 +17,7 @@ class Address extends Model
         'localidade',
         'uf',
         'ibge', 
-        'guia',
+        'gia',
         'ddd',
         'siafi'
     ];    
