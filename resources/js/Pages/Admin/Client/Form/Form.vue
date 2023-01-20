@@ -1,12 +1,22 @@
 <template>
     <div>
         <form @submit.prevent="submit" id="form">
-            <InputLabel for="nome" value="Nome" />
-            <TextInput class="block w-full" type="text" name="" id="nome" v-model="form.nome" />
-
-            <InputLabel for="sobrenome" value="Sobrenome" />
-            <TextInput class="block w-full" type="text" name="" id="sobrenome" v-model="form.sobrenome" />
-
+            <div class="sm:block md:flex w-full">
+                <div class="block md:pr-3 sm:w-full md:w-1/2">
+                    <InputLabel for="nome" value="Nome" />
+                    <TextInput class="block w-full" type="text" name="" id="nome" v-model="form.nome" />
+                </div>
+                <div class="block md:pl-3 sm:w-full md:w-1/2">
+                    <InputLabel for="sobrenome" value="Sobrenome" />
+                    <TextInput class="block w-full" type="text" name="" id="sobrenome" v-model="form.sobrenome" />
+                </div>
+            </div>
+            <InputLabel for="telefone" value="Telefone" />
+            <TextInput class="block w-full" type="text" name="" id="telefone" v-model="form.telefone" />
+            
+            <InputLabel for="email" value="Email" />
+            <TextInput class="block w-full" type="text" name="" id="email" v-model="form.email" />
+            
             <InputLabel for="cep" value="Cep" />
             <TextInput class="block w-full" type="text" name="" id="cep" v-model="form.cep" @keyup="buscaCep" />
             
@@ -31,7 +41,7 @@
             <input type="hidden" v-model="form.ibge">
             <input type="hidden" v-model="form.siafi">
 
-            <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <PrimaryButton class="mt-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Register
             </PrimaryButton>
         </form>
@@ -49,6 +59,9 @@
         nome: '',
         sobrenome: '',
         num_endereco: '',
+
+        telefone: '',
+        email: '',
 
         cep: '',
         logradouro: '',

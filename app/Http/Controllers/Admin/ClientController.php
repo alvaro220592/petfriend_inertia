@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\Phone;
+use App\Models\Email;
 use App\Models\Address;
 
 class ClientController extends Controller
@@ -39,21 +41,24 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $address = Address::where('cep', $request->cep)->first();
-        if($address){
-            $address_id = $address->id;
-        }else{
-            $address = new Address;
-            $address->fill($request->all());
-            $address->save();
-            $address_id = $address->id;
-        }
-        
-        $client = new Client;
         $dados = $request->all();
-        $dados['address_id'] = $address->id;
         
-        $client->create($dados);
+        $address_id = Address::storeFromClient($dados);
+        
+        // Cadastro do cliente
+        $client = new Client;   
+        $dados['address_id'] = $address_id; // Atribuição do endereço ao cliente        
+        $client->fill($dados);
+        $client->save();
+
+        // Cadastro dos contatos
+        if($request->telefone){
+            Phone::storeFromClient($dados, $client->id);
+        }
+
+        if($request->email){
+            Email::storeFromClient($dados, $client->id);
+        }
     }
 
     /**
