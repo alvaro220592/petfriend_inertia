@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Client;
+use App\Models\Phone;
+use App\Models\Email;
+use App\Models\Address;
 
 class ClientController extends Controller
 {
@@ -14,7 +18,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return inertia('Admin/Client/Index');
+        return inertia('Admin/Client/Index', [
+            'clients' => Client::all()
+        ]);
     }
 
     /**
@@ -35,7 +41,24 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+        
+        $address_id = Address::storeFromClient($dados);
+        
+        // Cadastro do cliente
+        $client = new Client;   
+        $dados['address_id'] = $address_id; // Atribuição do endereço ao cliente        
+        $client->fill($dados);
+        $client->save();
+
+        // Cadastro dos contatos
+        if($request->telefone){
+            Phone::storeFromClient($dados, $client->id);
+        }
+
+        if($request->email){
+            Email::storeFromClient($dados, $client->id);
+        }
     }
 
     /**

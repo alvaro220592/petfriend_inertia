@@ -17,8 +17,23 @@ class Address extends Model
         'localidade',
         'uf',
         'ibge', 
-        'guia',
+        'gia',
         'ddd',
         'siafi'
-    ];    
+    ];
+
+    // Cadastrando através do controller de clientes.
+    public static function storeFromClient($dados) {
+        $model = self::where('cep', $dados['cep'])->first();
+        
+        if($model){
+            $model_id = $model->id;
+            return $model->id;
+        }else{
+            $model = new self;
+            $model->fill($dados);
+            $model->save();
+            return $model->id;
+        }
+    }
 }
